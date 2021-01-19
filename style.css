@@ -23,7 +23,6 @@ input{
     margin: 10px 0 25px 0;
     padding-left: 10px;
     font-size: 17px;
-    
 }
 #btn-city{
     position: relative;
@@ -93,26 +92,20 @@ p{
     from{opacity: 0;}
     to{opacity: 1;}
 }
+img{
+    width: 70px;
+    height: 70px;
+}
 .current, .hourly_today, .nearby, .hourly_fiveDays{
     display: block;
-    /* background-color: #f6f6f6; */
     background-color: #fff;
     padding: 10px;
     margin: 20px;
-}
-
-.current div{
-    display: flex;
-    justify-content: space-between;
 }
 .add_curent{
     display:grid;
     grid-template-columns: repeat( 3, 1fr);
     margin-top: 10px;
-}
-img{
-    width: 70px;
-    height: 70px;
 }
 .add_curent img{
     width: 70px;
@@ -130,6 +123,10 @@ img{
 .temp p:first-child{
     font-size: 50px;
 }
+.current div{
+    display: flex;
+    justify-content: space-between;
+}
 .current p{
     font-size: 20px;
     color: gray;
@@ -144,23 +141,16 @@ img{
     display: grid;
     grid-template-columns: 3fr 1fr 1fr;
     background: #e7e6e6;
-    /* border: 1px solid rgb(204, 199, 199); */
     padding: 5px;
     margin: 5px;
-    /* vertical-align: left;
-    vertical-align: center; */
 }
 .box img{
     width: 50px;
     height: 50px;
 }
-
 .box div {
     margin-right: auto;
     margin: auto;
-    /* text-align: center; */
-    /* vertical-align: center; */
-    /* background-color: greenyellow; */
 }
 .five-days{
     background-color: #fff;
@@ -174,8 +164,8 @@ img{
     margin: 5px;
 }
 .five-days p:nth-last-child(2){
-font-size: 30px;
-font-weight: 500;
+    font-size: 30px;
+    font-weight: 500;
 } 
 .five-days p:nth-last-child(1){
     font-size: 20px;
@@ -187,15 +177,11 @@ font-weight: 500;
     display:grid;
     grid-template-columns: repeat( 5, 1fr);
     text-align: center;
-   
 }
 .wrap-five .active{
     background-color:#fff;
 }
 .pic{
-    /* border-radius: 50%; */
-    /* background-color:#fff; */
-    /* background-color: #b9c9e7; */
     margin: auto;
 }
 .wrap-hourly, .wrap-FDhourly{
@@ -213,16 +199,10 @@ font-weight: 500;
 }
 .hourly div, .hourly-first div{
     border-top: 1px solid rgba(201, 199, 199, 0.637);
-    /* border-bottom: 1px solid gray; */
 }
 h3, .hourly p, .hourly-first p{
     color: gray;
 }
-/* #error-mess{
-    background-color: #009595;
-    padding: 5px;
-    
-} */
 .error{
     background-image: url(Bg_Error.png) ;
     background-repeat: no-repeat;
@@ -231,7 +211,6 @@ h3, .hourly p, .hourly-first p{
     height: 330px;
     position: relative;
     text-align: center;
-
 }
 .error div{
     position: absolute;
@@ -239,7 +218,6 @@ h3, .hourly p, .hourly-first p{
     left: 28%;
     text-align: center;
     margin: auto;
-
 }
 .error p{
     font-family: 'PT Sans', sans-serif;
