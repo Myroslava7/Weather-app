@@ -130,30 +130,31 @@ function addCurent(data) {
     <div>
         <p>Sunrise: ${Sunrise}</p>
         <p>Sanset: ${Sanset}</p>
-        <p>Duration: ${duration} hr</p>
+        
     </div>
     </div>`
 }
+//<p>Duration: ${duration} hr</p>
 function curentHourly(data) {
   let hourlyToday = document.querySelector('.hourly_today')
   let hourly = data.hourly.slice(0, 6);
   let content1 = `
     <div class='hourly-first'>
-    <h3>TODAY</h3>
-    <img src='../IMG_Weather/empty.png'>
-    <p>Forecast</p>
-    <div><p>Temp (&#176;С)</p></div>
-    <div><p>RealFiel</p></div>
-    <div><p>Wind(km/h)</p></div>
+      <h3>TODAY</h3>
+      <img src='../IMG_Weather/empty.png'>
+      <p>Forecast</p>
+      <div><p>Temp (&#176;С)</p></div>
+      <div><p>RealFiel</p></div>
+      <div><p>Wind(km/h)</p></div>
     </div>`;
   let content = hourly.map(item => `
     <div class='hourly'>
-    <h3>${convertTimestamp(item.dt).slice(12)}</h3>
-    <img src='../IMG_Weather/${item.weather[0].icon}.png'>
-    <p>${item.weather[0].main}</p>
-    <div><p>${Math.round(item.temp)}&#176;С</p></div>
-    <div><p>${Math.round(item.feels_like)}&#176;С</p></div>
-    <div><p>${Math.round(item.wind_speed)}(km/h)</p></div>
+      <h3>${convertTimestamp(item.dt).slice(12)}</h3>
+      <img src='../IMG_Weather/${item.weather[0].icon}.png'>
+      <p>${item.weather[0].main}</p>
+      <div><p>${Math.round(item.temp)}&#176;С</p></div>
+      <div><p>${Math.round(item.feels_like)}&#176;С</p></div>
+      <div><p>${Math.round(item.wind_speed)}(km/h)</p></div>
     </div>
     `);
   hourlyToday.innerHTML = `<h2>HOURLY</h2>`
@@ -180,20 +181,20 @@ function fiveDaysWeather(data) {
   let daily2 = data.daily.slice(1, 5);
   let content1 = daily1.map(item => `
     <div class='five-days first active' data-id=${convertTimestamp(item.dt).toString().slice(0, 10)}>
-    <h2>TODAY</h2>
-    <p>${new Date(item.dt * 1000).toString().slice(3, 10)}</p>
-    <div id='first' class='pic'><img src='../IMG_Weather/${item.weather[0].icon}.png'></div>
-    <p>${Math.round(item.temp.day)}&#176;С</p>
-    <p>${item.weather[0].main}</p>
+      <h2>TODAY</h2>
+      <p>${new Date(item.dt * 1000).toString().slice(3, 10)}</p>
+      <div id='first' class='pic'><img src='../IMG_Weather/${item.weather[0].icon}.png'></div>
+      <p>${Math.round(item.temp.day)}&#176;С</p>
+      <p>${item.weather[0].main}</p>
     </div>
     `);
   let content2 = daily2.map(item => `
     <div class='five-days' data-id=${convertTimestamp(item.dt).toString().slice(0, 10)}>
-    <h2>${new Date(item.dt * 1000).toString().slice(0, 3)}</h2>
-    <p>${new Date(item.dt * 1000).toString().slice(3, 10)}</p>
-    <div class='pic'><img src='../IMG_Weather/${item.weather[0].icon}.png'></div>
-    <p>${Math.round(item.temp.day)}&#176;С</p>
-    <p>${item.weather[0].main}</p>
+      <h2>${new Date(item.dt * 1000).toString().slice(0, 3)}</h2>
+      <p>${new Date(item.dt * 1000).toString().slice(3, 10)}</p>
+      <div class='pic'><img src='../IMG_Weather/${item.weather[0].icon}.png'></div>
+      <p>${Math.round(item.temp.day)}&#176;С</p>
+      <p>${item.weather[0].main}</p>
     </div>
     `);
   const wrapFiveDay = document.createElement('div');
