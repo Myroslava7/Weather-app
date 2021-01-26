@@ -59,19 +59,12 @@ function durationT(data) {
   let dt2 = data.current.sunset;
   let d = ((dt2 - dt1) / 3600).toString().split('.');
   let h = d[0];
-  let m = d[1].slice(0, 2);
-  if (m > 59) {
-    h = +h + 1;
-    m = m - 60;
-    if (m < 10) {
-      m = m + '0'
-    }
-  }
-  else if (m < 10 && m >= 6) {
-    m = m + '0';
-    h = +h + 1;
-    m = m - 60;
-  }
+  let min = '0.' + d[1];
+  let mm = (min * 60).toString().split('.');
+  let m = mm[0];
+  if (m < 10) {
+    m = "0" + m;
+  };
   duration = `${h}:${m}`;
 }
 function formatDate(date) {
@@ -130,11 +123,10 @@ function addCurent(data) {
     <div>
         <p>Sunrise: ${Sunrise}</p>
         <p>Sanset: ${Sanset}</p>
-        
+        <p>Duration: ${duration} hr</p>
     </div>
     </div>`
 }
-//<p>Duration: ${duration} hr</p>
 function curentHourly(data) {
   let hourlyToday = document.querySelector('.hourly_today')
   let hourly = data.hourly.slice(0, 6);
@@ -177,6 +169,7 @@ function addNearbyPlaces(near) {
 }
 function fiveDaysWeather(data) {
   let fiveDays = document.querySelector('.by-five-days');
+  let errorBlock = document.querySelector('.error');
   let daily1 = data.daily.slice(0, 1);
   let daily2 = data.daily.slice(1, 5);
   let content1 = daily1.map(item => `
@@ -204,6 +197,11 @@ function fiveDaysWeather(data) {
   fiveDays.prepend(wrapFiveDay);
   wrapFiveDay.addEventListener('click', checkDay);
   activeEl = document.querySelector('.first');
+
+  if (errorBlock) {
+    errorBlock.remove();
+    console.log(errorBlock)
+  }
 }
 function checkDay(event) {
   const el = event.target.closest('.five-days');
@@ -232,7 +230,15 @@ function fiveDaysHourly(fiveDays, elID) {
     return item.dt_txt.includes(`${elID}`)
   })
   let hourly = brr.slice(0, 6);
-  let dayOfWeek = { Sun: 'Sunday', Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday', Thu: 'Thursday', Fri: 'Friday', Sat: 'Saturday' };
+  let dayOfWeek = {
+    Sun: 'Sunday',
+    Mon: 'Monday',
+    Tue: 'Tuesday',
+    Wed: 'Wednesday',
+    Thu: 'Thursday',
+    Fri: 'Friday',
+    Sat: 'Saturday'
+  };
   let content1 = `
     <div class='hourly-first'>
         <h3>${dayOfWeek[new Date(hourly[0].dt * 1000).toString().slice(0, 3)].toUpperCase()}</h3>
@@ -294,12 +300,6 @@ function search() {
     });
   console.log(citySearch)
   citySearch.value = '';
-
-  let errorBlock = document.querySelector('.error');
-  if (errorBlock) {
-    errorBlock.remove();
-    console.log(errorBlock)
-  }
 }
 function ErrorMessage(citySearch) {
   let wrapError = document.querySelector('#error-mess');
