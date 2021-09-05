@@ -113,7 +113,7 @@ function addCurent(data) {
     </div>
     <div class='add_curent'>
     <div>
-        <img src='../IMG_Weather/${data.current.weather[0].icon}.png'>
+        <img src='IMG_Weather/${data.current.weather[0].icon}.png'>
         <p>${data.current.weather[0].main}</p>
     </div>
     <div class='temp'>
@@ -146,7 +146,7 @@ function curentHourly(data) {
       <p>${item.weather[0].main}</p>
       <div><p>${Math.round(item.temp)}&#176;С</p></div>
       <div><p>${Math.round(item.feels_like)}&#176;С</p></div>
-      <div><p>${Math.round(item.wind_speed)}(km/h)</p></div>
+      <div><p>${Math.round(item.wind_speed)}</p></div>
     </div>
     `);
   hourlyToday.innerHTML = `<h2>HOURLY</h2>`
