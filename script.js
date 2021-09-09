@@ -133,7 +133,7 @@ function curentHourly(data) {
   let content1 = `
     <div class='hourly-first'>
       <h3>TODAY</h3>
-      <img src='../IMG_Weather/empty.png'>
+      <img src='IMG_Weather/empty.png'>
       <p>Forecast</p>
       <div><p>Temp (&#176;С)</p></div>
       <div><p>RealFiel</p></div>
@@ -142,7 +142,7 @@ function curentHourly(data) {
   let content = hourly.map(item => `
     <div class='hourly'>
       <h3>${convertTimestamp(item.dt).slice(12)}</h3>
-      <img src='../IMG_Weather/${item.weather[0].icon}.png'>
+      <img src='IMG_Weather/${item.weather[0].icon}.png'>
       <p>${item.weather[0].main}</p>
       <div><p>${Math.round(item.temp)}&#176;С</p></div>
       <div><p>${Math.round(item.feels_like)}&#176;С</p></div>
@@ -160,7 +160,7 @@ function addNearbyPlaces(near) {
   let nearby = document.querySelector('.nearby')
   let content = near.list.map(item => `<div class='box'>
         <div><p>${item.name}</p></div>
-        <div class='pic'><img src='../IMG_Weather/${item.weather[0].icon}.png'></div>
+        <div class='pic'><img src='IMG_Weather/${item.weather[0].icon}.png'></div>
         <div>${Math.round(item.main.temp)}&#176;С</div>
         </div>` );
   nearby.innerHTML = `<h2>NEARBY PLACES</h2>`
@@ -176,7 +176,7 @@ function fiveDaysWeather(data) {
     <div class='five-days first active' data-id=${convertTimestamp(item.dt).toString().slice(0, 10)}>
       <h2>TODAY</h2>
       <p>${new Date(item.dt * 1000).toString().slice(3, 10)}</p>
-      <div id='first' class='pic'><img src='../IMG_Weather/${item.weather[0].icon}.png'></div>
+      <div id='first' class='pic'><img src='IMG_Weather/${item.weather[0].icon}.png'></div>
       <p>${Math.round(item.temp.day)}&#176;С</p>
       <p>${item.weather[0].main}</p>
     </div>
@@ -185,7 +185,7 @@ function fiveDaysWeather(data) {
     <div class='five-days' data-id=${convertTimestamp(item.dt).toString().slice(0, 10)}>
       <h2>${new Date(item.dt * 1000).toString().slice(0, 3)}</h2>
       <p>${new Date(item.dt * 1000).toString().slice(3, 10)}</p>
-      <div class='pic'><img src='../IMG_Weather/${item.weather[0].icon}.png'></div>
+      <div class='pic'><img src='IMG_Weather/${item.weather[0].icon}.png'></div>
       <p>${Math.round(item.temp.day)}&#176;С</p>
       <p>${item.weather[0].main}</p>
     </div>
@@ -242,7 +242,7 @@ function fiveDaysHourly(fiveDays, elID) {
   let content1 = `
     <div class='hourly-first'>
         <h3>${dayOfWeek[new Date(hourly[0].dt * 1000).toString().slice(0, 3)].toUpperCase()}</h3>
-        <img src='../IMG_Weather/empty.png'>
+        <img src='IMG_Weather/empty.png'>
         <p>Forecast</p>
         <div><p>Temp (&#176;С)</p></div>
         <div><p>RealFiel</p></div>
@@ -252,7 +252,7 @@ function fiveDaysHourly(fiveDays, elID) {
   let content = hourly.map(item => `
     <div class='hourly'>
         <h3>${convertTimestamp(item.dt).slice(12)}</h3>
-        <img src='../IMG_Weather/${item.weather[0].icon}.png'>
+        <img src='IMG_Weather/${item.weather[0].icon}.png'>
         <p>${item.weather[0].main}</p>
         <div><p>${Math.round(item.main.temp)}&#176;С</p></div>
         <div><p>${Math.round(item.main.feels_like)}&#176;С</p></div>
