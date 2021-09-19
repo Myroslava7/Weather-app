@@ -53,6 +53,7 @@ function getCoord(coordIP) {
 function searchCoord(coordBySearch) {
   coordLon = coordBySearch.coord.lon;
   coordLat = coordBySearch.coord.lat;
+  document.querySelector('#CityName').innerHTML = `<h2>${coordBySearch.name} ${coordBySearch.sys.country}</h2>`;
 }
 function durationT(data) {
   let dt1 = data.current.sunrise;
@@ -137,7 +138,7 @@ function curentHourly(data) {
       <p>Forecast</p>
       <div><p>Temp (&#176;С)</p></div>
       <div><p>RealFiel</p></div>
-      <div><p>Wind(km/h)</p></div>
+      <div><p>Wind</p></div>
     </div>`;
   let content = hourly.map(item => `
     <div class='hourly'>
@@ -146,7 +147,7 @@ function curentHourly(data) {
       <p>${item.weather[0].main}</p>
       <div><p>${Math.round(item.temp)}&#176;С</p></div>
       <div><p>${Math.round(item.feels_like)}&#176;С</p></div>
-      <div><p>${Math.round(item.wind_speed)}</p></div>
+      <div><p>${Math.round(item.wind_speed)} km/h</p></div>
     </div>
     `);
   hourlyToday.innerHTML = `<h2>HOURLY</h2>`
@@ -167,9 +168,10 @@ function addNearbyPlaces(near) {
   let add = new AddEl;
   add.addElement('div', content.join(''), 'wrap-nearby', nearby);
 }
+let errorBlock = document.querySelector('.error');
 function fiveDaysWeather(data) {
   let fiveDays = document.querySelector('.by-five-days');
-  let errorBlock = document.querySelector('.error');
+  // let errorBlock = document.querySelector('.error');
   let daily1 = data.daily.slice(0, 1);
   let daily2 = data.daily.slice(1, 5);
   let content1 = daily1.map(item => `
@@ -197,11 +199,6 @@ function fiveDaysWeather(data) {
   fiveDays.prepend(wrapFiveDay);
   wrapFiveDay.addEventListener('click', checkDay);
   activeEl = document.querySelector('.first');
-
-  if (errorBlock) {
-    errorBlock.remove();
-    console.log(errorBlock)
-  }
 }
 function checkDay(event) {
   const el = event.target.closest('.five-days');
@@ -246,7 +243,7 @@ function fiveDaysHourly(fiveDays, elID) {
         <p>Forecast</p>
         <div><p>Temp (&#176;С)</p></div>
         <div><p>RealFiel</p></div>
-        <div><p>Wind(km/h)</p></div>
+        <div><p>Wind</p></div>
     </div>
     `;
   let content = hourly.map(item => `
@@ -256,17 +253,26 @@ function fiveDaysHourly(fiveDays, elID) {
         <p>${item.weather[0].main}</p>
         <div><p>${Math.round(item.main.temp)}&#176;С</p></div>
         <div><p>${Math.round(item.main.feels_like)}&#176;С</p></div>
-        <div><p>${Math.round(item.wind.speed)}(km/h)</p></div>
+        <div><p>${Math.round(item.wind.speed)} km/h</p></div>
     </div>
     `);
   hourlyFiveDays.innerHTML = `<h2>HOURLY</h2>`;
   let add = new AddEl;
   add.addElement('div', content1 + content.join(''), 'wrap-hourly', hourlyFiveDays);
 }
+let citySearchV = document.querySelector('#city-search');
+citySearchV.addEventListener('keyup', function (event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    document.getElementById("btn-city").click();
+  }
+})
 function search() {
-  let citySearch = document.querySelector('#city-search');
+  document.querySelectorAll('.error').forEach(function (a) {
+    a.remove();
+  })
   wrapError.style.display = 'block';
-  citySearch = citySearch.value;
+  let citySearch = citySearchV.value;
   fetch(`https://api.openweathermap.org/data/2.5/weather?q=${citySearch}&cnt=4&weather?&units=metric&appid=5c7bf69bf49ec29f3911aa5565f30578`)
     .then(function (resp) { return resp.json() })
     .then(function (coordBySearch) {
@@ -298,8 +304,7 @@ function search() {
       console.log(`${citySearch} could not be found`);
       ErrorMessage(citySearch)
     });
-  console.log(citySearch)
-  citySearch.value = '';
+  citySearchV.value = '';
 }
 function ErrorMessage(citySearch) {
   let wrapError = document.querySelector('#error-mess');
@@ -310,6 +315,7 @@ function ErrorMessage(citySearch) {
     <p>Please enter a different location.</p>
     </div> `;
   wrapError.style.display = 'none';
+  document.querySelector('#CityName').innerHTML = `<H2> </H2>`
   let errorMessage = new AddEl;
   errorMessage.addElement('div', content, 'error', wrapForecast);
 }
