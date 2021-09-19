@@ -217,7 +217,7 @@ h3, .hourly p, .hourly-first p{
     color: gray;
 }
 .error{
-    background-image: url(../IMG_Weather/Bg_Error.png) ;
+    background-image: url(IMG_Weather/Bg_Error.png) ;
     background-repeat: no-repeat;
     margin: 20px;
     padding: 20px;
